@@ -1,10 +1,11 @@
 import './App.css';
 import { AirFlow, Celsius, Container, CurrentWeather, Description, Location, Rain, Refresh, Temperature, WeatherCard, theme } from './customize';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactComponent as DayCloudyIcon } from './images/day-cloudy.svg';
 import { ReactComponent as AirFlowIcon } from './images/airFlow.svg'
 import { ReactComponent as RainIcon } from './images/rain.svg'
 import { ReactComponent as RefreshIcon } from './images/refresh.svg'
+import { ReactComponent as LoadingIcon } from './images/loading.svg'
 import { ThemeProvider } from '@emotion/react';
 import dayjs from 'dayjs';
 
@@ -20,9 +21,14 @@ function App() {
     temperature: 22.9,
     rainPossibility: 48.3,
     observationTime: '2020-12-12 22:10:00',
+    isLoading: true,
   })
 
-  const handleClick = () => {
+  const fetchCurrentWeather = () => {
+    setCurrentWeather((pervState) => ({
+      ...pervState,
+      isLoading: true,
+    }));
     fetch(`https://opendata.cwb.gov.tw/api/v1/rest/datastore/O-A0003-001?Authorization=${AUTHORIZATION_KEY}&locationName=${LOCATION_NAME}`)
     .then((response) => response.json())
     .then((data) => {
@@ -41,9 +47,14 @@ function App() {
         windSpeed: weatherElements.WDSD,
         description: '多雲時晴',
         rainPossibility: 60,
+        isLoading: false,
       })
     });
   };
+
+  useEffect(() => {
+    fetchCurrentWeather();
+  }, []);
   
   return (
     <ThemeProvider theme={currentTheme}>
@@ -59,10 +70,11 @@ function App() {
           </CurrentWeather>
           <AirFlow><AirFlowIcon />{currentWeather.windSpeed} m/h</AirFlow>
           <Rain><RainIcon />{Math.round(currentWeather.rainPossibility)}%</Rain>
-          <Refresh onClick={handleClick}> 最後觀測時間: {new Intl.DateTimeFormat('zh-TW', {
+          <Refresh onClick={fetchCurrentWeather}> 最後觀測時間: {new Intl.DateTimeFormat('zh-TW', {
             hour: 'numeric',
             minute: 'numeric',
-          }).format(dayjs(currentWeather.observationTime))} <RefreshIcon />
+          }).format(dayjs(currentWeather.observationTime))}
+          {currentWeather.isLoading ? <LoadingIcon /> : <RefreshIcon />}
           </Refresh>
         </WeatherCard>
       </Container>
