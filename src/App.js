@@ -39,7 +39,6 @@ function App() {
         }
         return neededElements;
       }, {})
-      console.log(weatherElements);
       setCurrentWeather({
         observationTime: locationData.time.obsTime,
         locationName: locationData.locationName,
@@ -55,7 +54,7 @@ function App() {
   useEffect(() => {
     fetchCurrentWeather();
   }, []);
-  
+  console.log(currentWeather.isLoading);
   return (
     <ThemeProvider theme={currentTheme}>
       <Container>
@@ -70,7 +69,7 @@ function App() {
           </CurrentWeather>
           <AirFlow><AirFlowIcon />{currentWeather.windSpeed} m/h</AirFlow>
           <Rain><RainIcon />{Math.round(currentWeather.rainPossibility)}%</Rain>
-          <Refresh onClick={fetchCurrentWeather}> 最後觀測時間: {new Intl.DateTimeFormat('zh-TW', {
+          <Refresh onClick={fetchCurrentWeather} isLoading={currentWeather.isLoading}> 最後觀測時間: {new Intl.DateTimeFormat('zh-TW', {
             hour: 'numeric',
             minute: 'numeric',
           }).format(dayjs(currentWeather.observationTime))}

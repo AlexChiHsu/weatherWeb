@@ -93,6 +93,20 @@ export const Refresh = styled.div`
     height: 15px;
     cursor: pointer;
   }
+  svg {
+    animation: rotate infinite 1.5s linear;
+    animation-duration: ${({ isLoading }) => (isLoading ? '1.5s' : '0s')}
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(360deg);
+    }
+    to {
+      transform: rotate(0deg);
+    }
+  }
+
 `;
 
 export const theme = {
