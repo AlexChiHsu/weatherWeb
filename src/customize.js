@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-export const WeatherCard = styled.div`
+export const WeatherCards = styled.div`
   position: relative;
   min-width: 360px;
   box-shadow: ${({ theme }) => theme.boxShadow};
@@ -75,10 +75,6 @@ export const Rain = styled.div`
   }
 `;
 
-// export const DayCloudy = styled(DayCloudyIcon)`
-//   flex-basis: 30%;
-// `;
-
 export const Refresh = styled.div`
   position: absolute;
   right: 15px;
@@ -107,6 +103,15 @@ export const Refresh = styled.div`
     }
   }
 
+`;
+
+export const WeatherCardWrapper = styled.div`
+  position: relative;
+  min-width: 360px;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  background-color: ${({ theme }) => theme.foregroundColor};
+  box-sizing: border-box;
+  padding: 30px 15px;
 `;
 
 export const theme = {
