@@ -3,13 +3,18 @@ import { ReactComponent as AirFlowIcon } from './../images/airFlow.svg';
 import { ReactComponent as RainIcon } from './../images/rain.svg';
 import { ReactComponent as RefreshIcon } from './../images/refresh.svg';
 import { ReactComponent as LoadingIcon } from './../images/loading.svg';
-import { AirFlow, Celsius, CurrentWeather, Description, Location, Rain, Refresh, Temperature, WeatherCardWrapper } from '../customize.js';
+import { AirFlow, Celsius, CurrentWeather, Description, Location, Rain, Refresh, Temperature, WeatherCardWrapper, Cog } from '../customize.js';
 import WeatherIcon from '../WeatherIcon';
 
-const WeatherCard = ({ weatherElement, moment, fetchData }) => {
+const WeatherCard = ({
+  weatherElement,
+  moment,
+  fetchData,
+  handleCurrentPageChange,
+  cityName,
+}) => {
   const {
     observationTime,
-    locationName,
     temperature,
     windSpeed,
     description,
@@ -21,7 +26,8 @@ const WeatherCard = ({ weatherElement, moment, fetchData }) => {
 
   return (
     <WeatherCardWrapper>
-      <Location>{locationName}</Location>
+      <Cog onClick={() => handleCurrentPageChange('WeatherSetting')} />
+      <Location>{cityName}</Location>
       <Description>
         {description} {comfortability}
       </Description>

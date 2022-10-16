@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { ReactComponent as CogIcon } from './images/cog.svg';
 
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor};
@@ -104,7 +105,14 @@ export const Refresh = styled.div`
   }
 
 `;
-
+export const Cog = styled(CogIcon)`
+position: absolute;
+top: 30px;
+right: 15px;
+width: 15px;
+height: 15px;
+cursor: pointer;
+`;
 export const WeatherCardWrapper = styled.div`
   position: relative;
   min-width: 360px;
@@ -112,6 +120,93 @@ export const WeatherCardWrapper = styled.div`
   background-color: ${({ theme }) => theme.foregroundColor};
   box-sizing: border-box;
   padding: 30px 15px;
+`;
+export const WeatherSettingWrapper = styled.div`
+  position: relative;
+  min-width: 360px;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  background-color: ${({ theme }) => theme.foregroundColor};
+  box-sizing: border-box;
+  padding: 20px;
+`;
+
+export const Title = styled.div`
+  font-size: 28px;
+  color: ${({ theme }) => theme.titleColor};
+  margin-bottom: 30px;
+`;
+
+export const StyledLabel = styled.label`
+  display: block;
+  font-size: 16px;
+  color: ${({ theme }) => theme.textColor};
+  margin-bottom: 15px;
+`;
+
+export const StyledSelect = styled.select`
+  display: block;
+  box-sizing: border-box;
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.textColor};
+  outline: none;
+  width: 100%;
+  max-width: 100%;
+  color: ${({ theme }) => theme.textColor};
+  font-size: 16px;
+  padding: 7px 10px;
+  margin-bottom: 40px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: none;
+  outline: 0;
+`;
+
+export const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    user-select: none;
+    margin: 0;
+    letter-spacing: 0.3px;
+    line-height: 1;
+    cursor: pointer;
+    overflow: visible;
+    text-transform: none;
+    border: 1px solid transparent;
+    background-color: transparent;
+    height: 35px;
+    width: 80px;
+    border-radius: 5px;
+    font-size: 14px;
+    &:focus,
+    &.focus {
+      outline: 0;
+      box-shadow: none;
+    }
+    &::-moz-focus-inner {
+      padding: 0;
+      border-style: none;
+    }
+  }
+`;
+
+export const Back = styled.button`
+  && {
+    color: ${({ theme }) => theme.textColor};
+    border-color: ${({ theme }) => theme.textColor};
+  }
+`;
+
+export const Save = styled.button`
+  && {
+    color: white;
+    background-color: #40a9f3;
+  }
 `;
 
 export const theme = {
